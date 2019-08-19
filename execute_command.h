@@ -1,1 +1,1 @@
-void execute_command(char *command, char *arg, int no_of_args);
+void execute_command(char **args, int no_of_args);

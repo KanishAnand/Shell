@@ -18,7 +18,7 @@
 void wait_input()
 {
     int length = 200;
-    int length_2d = 200000;
+    // int length_2d = 200000;
     char *buff = (char *)malloc(length * sizeof(char));
     fgets(buff, length, stdin);
     //char *part1,*part2;
@@ -38,13 +38,11 @@ void wait_input()
         }
         ++i;
     }
-    // part1 = strsep(&buff," ");
-    // part2 = strsep(&buff," ");
-    // int l = strlen(part2);
+
     //this is done because fgets puts a new line character at end of read line so when we pass it to exectue command as arg then chdir(arg) was not working.
     // part2[l-1] = '\0';
     // printf("%d\n",i);
     int l = strlen(parts[i]);
     parts[i][l - 1] = '\0';
-    execute_command(parts[0], parts[1], i);
+    execute_command(parts, i);
 }

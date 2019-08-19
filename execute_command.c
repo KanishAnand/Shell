@@ -15,28 +15,28 @@
 #include "execute_command.h"
 #include "main.h"
 
-void execute_command(char *command, char *arg, int no_of_args)
+void execute_command(char **args, int no_of_args)
 {
     char cwd[1024];
-    if (strcmp(command, "cd") == 0)
+    if (strcmp(args[0], "cd") == 0)
     {
-        chdir(arg);
+        chdir(args[1]);
         init_shell();
     }
-    else if (strcmp(command, "echo") == 0)
+    else if (strcmp(args[0], "echo") == 0)
     {
-        printf("%s\n", arg);
+        printf("%s\n", args[1]);
         init_shell();
     }
-    else if (strcmp(command, "pwd") == 0)
+    else if (strcmp(args[0], "pwd") == 0)
     {
         char cwd[1024];
         printf("%s\n", getcwd(cwd, sizeof(cwd)));
         init_shell();
     }
-    else if (strcmp(command, "ls") == 0)
+    else if (strcmp(args[0], "ls") == 0)
     {
-        ls_implement(command, arg, no_of_args);
+        ls_implement(args, no_of_args);
         init_shell();
     }
 }
