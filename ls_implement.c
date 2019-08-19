@@ -125,24 +125,4 @@ void printFileProperties(char *name, struct stat stats)
     char tm[20];
     strftime(tm, 20, "%T", localtime(&(buff.st_mtime)));
     printf("%s ", tm);
-    //printf("%s ", ctime(&buff.st_mtime));
-    // File permissions
-    // printf("\nFile access: ");
-    // if (stats.st_mode & R_OK)
-    //     printf("r");
-    // if (stats.st_mode & W_OK)
-    //     printf("w");
-    // if (stats.st_mode & X_OK)
-    //     printf("x ");
-
-    // // File size
-    // printf("%ld ", stats.st_size);
-
-    // // Get file creation time in seconds and
-    // // convert seconds to date and time format
-    // dt = *(gmtime(&stats.st_ctime));
-    // printf("%d-%d-%d %d:%d:%d ", dt.tm_mday, dt.tm_mon, dt.tm_year + 1900, dt.tm_hour, dt.tm_min, dt.tm_sec);
-    // // File modification time
-    // dt = *(gmtime(&stats.st_mtime));
-    // printf("%d-%d-%d %d:%d:%d ", dt.tm_mday, dt.tm_mon, dt.tm_year + 1900, dt.tm_hour, dt.tm_min, dt.tm_sec);
 }
