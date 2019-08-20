@@ -167,10 +167,17 @@ int main()
 	clear();
 	getcwd(home_dir, sizeof(home_dir));
 	init_shell();
-	while (1)
-	{
-		// printDir();
-		wait_input();
-	}
+	char *cmd = "ls";
+	char *argv[3];
+	argv[0] = "ls";
+	argv[1] = "-la";
+	argv[2] = NULL;
+
+	execvp(cmd, argv + 0);
+	// while (1)
+	// {
+	// 	// printDir();
+	// 	wait_input();
+	// }
 	return 0;
 }
