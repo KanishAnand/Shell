@@ -17,7 +17,7 @@
 
 void wait_input()
 {
-    int length = 200;
+    int length = 500;
     // int length_2d = 200000;
     char *buff = (char *)malloc(length * sizeof(char));
     fgets(buff, length, stdin);
@@ -44,5 +44,9 @@ void wait_input()
     // printf("%d\n",i);
     int l = strlen(parts[i]);
     parts[i][l - 1] = '\0';
+
+    //this parts[i+1] = 0 is added because arg which is to be passed to execvp should be ended with 0 so that it knows that it ends otherwise we get error of
+    //no such file or directory https://stackoverflow.com/questions/33813944/no-such-file-or-directory-when-using-execv
+    parts[i + 1] = 0;
     execute_command(parts, i);
 }

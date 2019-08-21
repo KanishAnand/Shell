@@ -37,6 +37,7 @@ void printDir()
 
 void init_shell()
 {
+    printf("\033[1;32m");
     struct utsname buffer;
     printf("***");
     char *user = getenv("USER");
@@ -44,4 +45,5 @@ void init_shell()
     //printf("%s:",(&buffer)->sysname);
     printDir();
     // sleep(1);
+    printf("\033[0m");
 }

@@ -14,6 +14,7 @@
 #include "ls_implement.h"
 #include "execute_command.h"
 #include "main.h"
+#include "pinfo.h"
 #include "system_commands.h"
 
 void execute_command(char **args, int no_of_args)
@@ -44,9 +45,10 @@ void execute_command(char **args, int no_of_args)
         printf("\n");
         init_shell();
     }
-    else if (strcmp(args[0], "vi") == 0 || strcmp(args[0], "vim") == 0)
+    else if (strcmp(args[0], "pinfo") == 0)
     {
-        system_commands(args, no_of_args);
+        pinfo(args, no_of_args);
+        printf("\n");
         init_shell();
     }
     else

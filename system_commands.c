@@ -16,6 +16,8 @@
 #include "execute_command.h"
 #include "main.h"
 
+// as we have to use execvp so we need to make a child process bcz otherwise execvp replaces the current running process with a new process
+
 void system_commands(char **args, int no_of_args)
 {
     // FILE *fp = NULL;
@@ -57,13 +59,13 @@ void system_commands(char **args, int no_of_args)
         // printf("%s\n", getcwd(cwd, sizeof(cwd)));
         // printf("\n");
         // init_shell();
-        printf("kF\n");
+        // printf("kF\n");
         execvp(args[0], args);
         // if (execvp(args[0], args) == -1)
         // {
         //     perror("exec");
         // }
-        printf("kk\n");
+        //printf("kk\n");
         if (background == 1)
         {
             printf("Background Process Completed");
@@ -81,7 +83,7 @@ void system_commands(char **args, int no_of_args)
         { //this blocks parent process until all its children process not gets finished.
             wait(NULL);
         }
-        printf("kk\n");
+        // printf("kk\n");
         // if (wait(0) == -1)
         // {
         //     perror("wait");

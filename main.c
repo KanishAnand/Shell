@@ -13,6 +13,7 @@
 #include "init_shell.h"
 #include "ls_implement.h"
 #include "execute_command.h"
+#include "pinfo.h"
 
 #define clear() printf("\033[H\033[J")
 //Global Variables
