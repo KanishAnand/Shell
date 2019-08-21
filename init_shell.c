@@ -20,10 +20,17 @@ void printDir()
     char cwd[1024];
     getcwd(cwd, sizeof(cwd));
     int len = strlen(home_dir);
-    printf("~");
-    for (int i = len; i < strlen(cwd); i++)
+    if (strlen(cwd) < len)
     {
-        printf("%c", cwd[i]);
+        printf("%s", cwd);
+    }
+    else
+    {
+        printf("~");
+        for (int i = len; i < strlen(cwd); i++)
+        {
+            printf("%c", cwd[i]);
+        }
     }
     printf(">");
 }

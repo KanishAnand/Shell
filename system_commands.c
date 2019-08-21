@@ -18,21 +18,32 @@
 
 void system_commands(char **args, int no_of_args)
 {
-    FILE *fp = NULL;
-    int status;
+    // FILE *fp = NULL;
+    // int status;
+    int background = 0;
+    if (strcmp(args[no_of_args], "&") == 0)
+    {
+        background = 1;
+    }
+
     pid_t pid = fork();
-    pid_t sid = 0;
+    // pid_t sid = 0;
     if (pid == 0)
     {
 
         // int x = open("/dev/null", O_RDWR);
         // dup(x);
-        setpgid(0, 0);
-        umask(0);
-        sid = setsid();
-        close(STDIN_FILENO);
-        close(STDOUT_FILENO);
-        //close(STDERR_FILENO);
+        if (background == 1)
+        {
+            // this changes the group pid of the process to 0
+            setpgid(0, 0);
+            //umask(0);
+            //sid = setsid();
+            // close the input and error printing of background process but not output as we want the final result
+            close(STDIN_FILENO);
+            //close(STDOUT_FILENO);
+            close(STDERR_FILENO);
+        }
         // fp = fopen("mydaemonfile.txt", "w+");
         // int i = 0;
         // while (i < 5)
@@ -41,26 +52,36 @@ void system_commands(char **args, int no_of_args)
         //     //fprintf(fp, "%d", i);
         //     i++;
         // }
-        // fclose(fp);
+        //fclose(fp);
         // char cwd[1024];
         // printf("%s\n", getcwd(cwd, sizeof(cwd)));
         // printf("\n");
         // init_shell();
-        if (execvp(args[0], args) == -1)
+        printf("kF\n");
+        execvp(args[0], args);
+        // if (execvp(args[0], args) == -1)
+        // {
+        //     perror("exec");
+        // }
+        printf("kk\n");
+        if (background == 1)
         {
-            perror("exec");
+            printf("Background Process Completed");
         }
-        printf("process completed");
     }
     if (pid > 0)
     {
         // int status;
         // (void)waitpid(pid, &status, 0);
         //waitpid(-1, &status, WNOHANG);
-        printf("MM\n");
+        // printf("MM\n");
         // init_shell();
         // wait_input();
-        // wait(NULL);
+        if (background == 0)
+        { //this blocks parent process until all its children process not gets finished.
+            wait(NULL);
+        }
+        printf("kk\n");
         // if (wait(0) == -1)
         // {
         //     perror("wait");
