@@ -23,37 +23,41 @@ void execute_command(char **args, int no_of_args)
     if (strcmp(args[0], "cd") == 0)
     {
         chdir(args[1]);
-        printf("\n");
-        init_shell();
+        //printf("\n");
+        // init_shell();
     }
     else if (strcmp(args[0], "echo") == 0)
     {
         printf("%s\n", args[1]);
-        printf("\n");
-        init_shell();
+        // printf("\n");
+        // init_shell();
     }
     else if (strcmp(args[0], "pwd") == 0)
     {
         char cwd[1024];
         printf("%s\n", getcwd(cwd, sizeof(cwd)));
-        printf("\n");
-        init_shell();
+        // printf("\n");
+        // init_shell();
     }
     else if (strcmp(args[0], "ls") == 0)
     {
         ls_implement(args, no_of_args);
-        printf("\n");
-        init_shell();
+        // printf("\n");
+        // init_shell();
     }
     else if (strcmp(args[0], "pinfo") == 0)
     {
         pinfo(args, no_of_args);
-        printf("\n");
-        init_shell();
+        //printf("\n");
+        //init_shell();
     }
     else
     {
-        system_commands(args, no_of_args);
-        init_shell();
+        // printf("%ld\n", strlen(args[0]));
+        if (strlen(args[0]) != 0)
+        {
+            system_commands(args, no_of_args);
+        }
+        // init_shell();
     }
 }

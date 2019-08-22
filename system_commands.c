@@ -48,7 +48,7 @@ void system_commands(char **args, int no_of_args)
         }
         // fp = fopen("mydaemonfile.txt", "w+");
         // int i = 0;
-        // while (i < 5)
+        // while (i < 10)
         // {
         //     sleep(1);
         //     //fprintf(fp, "%d", i);
@@ -60,28 +60,33 @@ void system_commands(char **args, int no_of_args)
         // printf("\n");
         // init_shell();
         // printf("kF\n");
-        execvp(args[0], args);
-        // if (execvp(args[0], args) == -1)
-        // {
-        //     perror("exec");
-        // }
-        //printf("kk\n");
-        if (background == 1)
+        //execvp(args[0], args);
+        if (execvp(args[0], args) == -1)
         {
-            printf("Background Process Completed");
+            perror("exec");
         }
+        exit(0);
+        //printf("kk\n");
+        // if (background == 1)
+        // {
+        //     printf("Background Process Completed");
+        // }
     }
     if (pid > 0)
     {
-        // int status;
-        // (void)waitpid(pid, &status, 0);
-        //waitpid(-1, &status, WNOHANG);
-        // printf("MM\n");
-        // init_shell();
-        // wait_input();
+
         if (background == 0)
-        { //this blocks parent process until all its children process not gets finished.
+        {
+            //this blocks parent process until all its children process not gets finished.
             wait(NULL);
+        }
+        else
+        {
+            // this prevents making of zombie process which  is very important
+            //https: //www.geeksforgeeks.org/zombie-processes-prevention/
+            signal(SIGCHLD, SIG_IGN);
+            background_pids[no_of_backgroundprocess] = pid;
+            no_of_backgroundprocess++;
         }
         // printf("kk\n");
         // if (wait(0) == -1)

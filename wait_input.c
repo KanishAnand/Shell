@@ -21,8 +21,7 @@ void wait_input()
     // int length_2d = 200000;
     char *buff = (char *)malloc(length * sizeof(char));
     fgets(buff, length, stdin);
-    //char *part1,*part2;
-    //char *parts = (char*)malloc(length_2d*sizeof(char));
+    // printf("DF");
     char **parts = (char **)malloc(40 * sizeof(char *));
     for (int i = 0; i < 5; i++)
         parts[i] = (char *)malloc(400 * sizeof(char));

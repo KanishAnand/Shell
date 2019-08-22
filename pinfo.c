@@ -29,7 +29,7 @@ void pinfo(char **args, int no_of_args)
     char st[] = "/proc/";
     char b[] = "/stat";
 
-    if (no_of_args == 0)
+    if (no_of_args == 0 || strlen(args[1]) == 0)
     {
         a[1] = "/proc/self/stat";
     }
