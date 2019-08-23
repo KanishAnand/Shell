@@ -20,8 +20,6 @@
 
 void system_commands(char **args, int no_of_args)
 {
-    // FILE *fp = NULL;
-    // int status;
     int background = 0;
     if (strcmp(args[no_of_args], "&") == 0)
     {
@@ -29,7 +27,6 @@ void system_commands(char **args, int no_of_args)
     }
 
     pid_t pid = fork();
-    // pid_t sid = 0;
     if (pid == 0)
     {
 
@@ -43,7 +40,7 @@ void system_commands(char **args, int no_of_args)
             //sid = setsid();
             // close the input and error printing of background process but not output as we want the final result
             close(STDIN_FILENO);
-            //close(STDOUT_FILENO);
+            close(STDOUT_FILENO);
             close(STDERR_FILENO);
         }
         // fp = fopen("mydaemonfile.txt", "w+");
@@ -85,7 +82,9 @@ void system_commands(char **args, int no_of_args)
             // this prevents making of zombie process which  is very important
             //https: //www.geeksforgeeks.org/zombie-processes-prevention/
             signal(SIGCHLD, SIG_IGN);
+            printf("%d\n", pid);
             background_pids[no_of_backgroundprocess] = pid;
+            background_name[no_of_backgroundprocess] = args[0];
             no_of_backgroundprocess++;
         }
         // printf("kk\n");

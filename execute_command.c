@@ -22,14 +22,22 @@ void execute_command(char **args, int no_of_args)
     char cwd[1024];
     if (strcmp(args[0], "cd") == 0)
     {
+        // printf("%ld\n", strlen(args[1]));
+        if (args[1] == NULL || strlen(args[1]) == 0)
+        {
+            args[1] = home_dir;
+        }
         chdir(args[1]);
         //printf("\n");
         // init_shell();
     }
     else if (strcmp(args[0], "echo") == 0)
     {
-        printf("%s\n", args[1]);
-        // printf("\n");
+        for (int i = 1; i <= no_of_args; i++)
+        {
+            printf("%s ", args[i]);
+        }
+        printf("\n");
         // init_shell();
     }
     else if (strcmp(args[0], "pwd") == 0)
