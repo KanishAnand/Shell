@@ -16,6 +16,7 @@
 #include "main.h"
 #include "pinfo.h"
 #include "history.h"
+#include "nightswatch.h"
 #include "system_commands.h"
 
 void execute_command(char **args, int no_of_args)
@@ -99,6 +100,10 @@ void execute_command(char **args, int no_of_args)
     else if (strcmp(args[0], "exit") == 0)
     {
         exit(0);
+    }
+    else if (strcmp(args[0], "nightswatch") == 0)
+    {
+        nightswatch(args, no_of_args);
     }
     else
     {

@@ -1,0 +1,1 @@
+void nightswatch(char **args, int no_of_args);

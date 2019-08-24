@@ -1,20 +1,20 @@
-cd Assignment23
-cd ..
-cd 
-echo kan
-cd ..
-cd Assignment23
-cd
-echo kanish
+ls -l
+history
+nightswatch
+man ls &
+ps
+vim &
 ls
-ls -l
-ls
-clear
-ls -a
-clear
-ls -l
-ls -al
-ls -l
-man stat
-man lstat
-ls -l
+man ls &
+vim &
+ps
+nightswatch -n 2 dirty
+nightswatch -n 5 dirty
+nightswatch -n 1 dirty
+nightswatch -n 3 dirty
+nightswatch -n 5 dirty
+nightswatch -n 3 dirty
+cd a
+mkdir a
+cd a
+nightswatch -n 5 lkds
