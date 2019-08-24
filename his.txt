@@ -1,0 +1,20 @@
+cd a
+cd b
+cd
+cd ~
+cd ~/a
+ls
+ls -l
+ls -al
+pwd
+cd
+pwd
+echo dsfsadf
+echo 			lkjdgs
+			ls
+clear
+ls		a
+ls          a
+ls           
+echo            sd
+clear

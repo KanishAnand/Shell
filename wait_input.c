@@ -14,20 +14,26 @@
 #include "ls_implement.h"
 #include "execute_command.h"
 #include "main.h"
+#include "history.h"
 
 void wait_input()
 {
-
     int length = 500;
     char *buff = (char *)malloc(length * sizeof(char));
     fgets(buff, length, stdin);
+    char *dp = (char *)malloc(length * sizeof(char));
+    strcpy(dp, buff);
 
+    // printf("k\n");
+    // printf("%d\n", &dup);
+
+    // printf("l%s\n", buff);
     int cnt = 0;
     char **token = (char **)malloc(40 * sizeof(char *));
-    for (int i = 0; i < 25; i++)
-    {
-        token[i] = (char *)malloc(400 * sizeof(char));
-    }
+    // for (int i = 0; i < 25; i++)
+    // {
+    //     token[i] = (char *)malloc(400 * sizeof(char));
+    // }
     token[0] = strtok(buff, ";");
 
     int no_of_commands = 0;
@@ -46,20 +52,14 @@ void wait_input()
     char *temp = "";
     temp = (char *)malloc(sizeof(char) * 30);
     int j = 0;
-    // printf("start%ld\n", strlen(temp));
-    // printf("%d\n", p);
 
     for (int i = p; i < strlen(token[0]); i++)
     {
         temp[j] = token[0][i];
         j++;
     }
-    // printf("temp=%ld\n", strlen(temp));
     token[0] = temp;
     len = strlen(token[0]);
-    // printf("j=%d\n", j);
-
-    //printf("token 0 = %ld\n", strlen(token[0]));
 
     while (len != 0 && token[no_of_commands] != NULL)
     {
@@ -70,7 +70,6 @@ void wait_input()
         {
             break;
         }
-        //printf("kk%s\n", token[no_of_commands]);
         len = strlen(token[no_of_commands]);
 
         while (token[no_of_commands][len - 1] == '\n' || token[no_of_commands][len - 1] == '\t' || token[no_of_commands][len - 1] == ' ')
@@ -96,18 +95,11 @@ void wait_input()
         }
         token[no_of_commands] = temp;
         len = strlen(token[no_of_commands]);
-        //printf("%s\n", token[1]);
-        //printf("in%ld\n", strlen(token[no_of_commands]));
-        // if (token[no_of_commands][len - 1] == '\n')
-        // {
-        //     token[no_of_commands][len - 1] = '\0';
-        // }
     }
 
     int n = 0;
     while (n < no_of_commands)
     {
-        // printf("%d\n", strlen(token[n]));
         int le = strlen(token[n]);
         // while (token[n][0] == '\n' || token[n][0] == '\t')
         // {
@@ -119,11 +111,10 @@ void wait_input()
         //     token[n][le - 1] = '\0';
         //     le--;
         // }
-        // printf("%d\n", strlen(token[n]));
 
         char **parts = (char **)malloc(40 * sizeof(char *));
-        for (int i = 0; i < 5; i++)
-            parts[i] = (char *)malloc(400 * sizeof(char));
+        // for (int i = 0; i < 5; i++)
+        //     parts[i] = (char *)malloc(400 * sizeof(char));
 
         parts[0] = strtok(token[n], " ");
         int i = 0;
@@ -135,21 +126,6 @@ void wait_input()
         }
 
         --i;
-        //printf("%d\n", i);
-        // for (int j = 0; j <= i; j++)
-        // {
-        //     printf("%ld\n", strlen(parts[j]));
-        // }
-        // while (parts[i] != NULL)
-        // {
-        //     parts[i] = strtok(buff, " ");
-        //     int l = strlen(parts[i]);
-        //     if (parts[i][l - 1] == '\n')
-        //     {
-        //         break;
-        //     }
-        //     ++i;
-        // }
 
         //this is done because fgets puts a new line character at end of read line so when we pass it to exectue command as arg then chdir(arg) was not working.
         int l = strlen(parts[i]);
@@ -159,9 +135,12 @@ void wait_input()
         parts[i + 1] = 0;
         execute_command(parts, i);
         ++n;
-        //  printf("\n");
-        //strcpy(token, use2);
-        // token = strtok(NULL, ";");
+        dp[strlen(dp) - 1] = '\0';
+        history(dp);
+        // free(dp);
+        free(parts);
+        free(temp);
+        free(buff);
         //printf("%s\n", token);
     }
 }

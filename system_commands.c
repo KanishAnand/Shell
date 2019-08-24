@@ -32,6 +32,7 @@ void system_commands(char **args, int no_of_args)
 
         // int x = open("/dev/null", O_RDWR);
         // dup(x);
+
         if (background == 1)
         {
             // this changes the group pid of the process to 0

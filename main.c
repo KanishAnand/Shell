@@ -22,16 +22,11 @@ char home_dir[1024];
 int background_pids[200];
 int no_of_backgroundprocess = 0;
 char **background_name;
-// char *ll;
 
 int main()
 {
 	clear();
 	background_name = (char **)malloc(100 * sizeof(char *));
-	for (int i = 0; i < 50; i++)
-	{
-		background_name[i] = (char *)malloc(400 * sizeof(char));
-	}
 	getcwd(home_dir, sizeof(home_dir));
 	init_shell();
 
@@ -44,7 +39,6 @@ int main()
 		{
 			if (background_pids[i] != 0)
 			{
-				//printf("%d\n", background_pids[i]);
 				int no = background_pids[i];
 				char *val = (char *)malloc(sizeof(char) * 100);
 				char *cat = (char *)malloc(sizeof(char) * 100);
@@ -63,7 +57,6 @@ int main()
 					cat[j] = val[cnt - j];
 					++j;
 				}
-				//printf("%s\n", cat);
 				strcat(st, cat);
 				strcat(st, "/stat");
 				int fd = open(st, O_RDONLY);

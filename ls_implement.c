@@ -22,15 +22,47 @@ void ls_implement(char **args, int no_of_args)
     DIR *p;
     struct dirent *d;
     struct stat stats;
-
     if (no_of_args == 0 || strlen(args[1]) == 0)
     {
+        printf("%d\n", no_of_args);
         char cwd[1024];
         getcwd(cwd, sizeof(cwd));
         args[1] = cwd;
     }
 
-    if (args[1][0] == '-')
+    char *newpath = (char *)malloc(sizeof(char) * 300);
+    strcpy(newpath, home_dir);
+
+    int l = strlen(home_dir);
+    l--;
+    if (args[1][0] == '~')
+    {
+        for (int i = 1; i < strlen(args[1]); i++)
+        {
+            newpath[l + i] = args[1][i];
+        }
+
+        p = opendir(newpath);
+        if (p == NULL)
+        {
+            perror("ls");
+        }
+        else
+        {
+            while (d = readdir(p))
+            {
+                char *nm = d->d_name;
+                char s = nm[0];
+                if (s != '.')
+                {
+                    printf("%s ", d->d_name);
+                    printf("\n");
+                }
+            }
+        }
+    }
+
+    else if (args[1][0] == '-')
     {
         char cwd[1024];
         getcwd(cwd, sizeof(cwd));
@@ -77,7 +109,7 @@ void ls_implement(char **args, int no_of_args)
         p = opendir(args[1]);
         if (p == NULL)
         {
-            perror("Cannot find directory");
+            perror("ls");
         }
         else
         {
@@ -112,17 +144,17 @@ void printFileProperties(char *name, struct stat stats)
     printf((buff.st_mode & S_IROTH) ? "r" : "-");
     printf((buff.st_mode & S_IWOTH) ? "w" : "-");
     printf((buff.st_mode & S_IXOTH) ? "x" : "-");
-    printf(" ");
-    printf("%ld ", buff.st_nlink);
-    printf("%s ", getpwuid(buff.st_uid)->pw_name);
-    printf("%s ", getgrgid(buff.st_gid)->gr_name);
-    printf("%ld ", buff.st_size);
+    printf("\t");
+    printf("%ld\t", buff.st_nlink);
+    printf("%s\t", getpwuid(buff.st_uid)->pw_name);
+    printf("%s\t", getgrgid(buff.st_gid)->gr_name);
+    printf("%ld\t", buff.st_size);
     char buffer[80];
     time_t timeStamp = buff.st_atime;
     dt = localtime(&timeStamp);
-    strftime(buffer, 80, " %h %e ", dt);
-    printf("%s", buffer);
+    strftime(buffer, 80, " %h %e\t", dt);
+    printf("%s\t", buffer);
     char tm[20];
     strftime(tm, 20, "%T", localtime(&(buff.st_mtime)));
-    printf("%s ", tm);
+    printf("%s\t", tm);
 }

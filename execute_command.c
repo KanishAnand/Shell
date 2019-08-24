@@ -15,19 +15,47 @@
 #include "execute_command.h"
 #include "main.h"
 #include "pinfo.h"
+#include "history.h"
 #include "system_commands.h"
 
 void execute_command(char **args, int no_of_args)
 {
     char cwd[1024];
+
     if (strcmp(args[0], "cd") == 0)
     {
-        // printf("%ld\n", strlen(args[1]));
-        if (args[1] == NULL || strlen(args[1]) == 0)
+        if (args[1] == NULL || strlen(args[1]) == 0 || strcmp(args[1], "~") == 0)
         {
             args[1] = home_dir;
         }
-        chdir(args[1]);
+        char *newpath = (char *)malloc(sizeof(char) * 300);
+        strcpy(newpath, home_dir);
+
+        int l = strlen(home_dir);
+        l--;
+        if (args[1][0] == '~')
+        {
+            for (int i = 1; i < strlen(args[1]); i++)
+            {
+                newpath[l + i] = args[1][i];
+            }
+            // printf("%s\n", newpath);
+            if (chdir(newpath) == -1)
+            {
+                perror("cd");
+
+                // printf("%s", args[1]);
+            }
+        }
+        else
+        {
+            if (chdir(args[1]) == -1)
+            {
+                perror("cd");
+                // printf("%s", args[1]);
+            }
+            //  printf("ka\n");
+        }
         //printf("\n");
         // init_shell();
     }
@@ -49,6 +77,7 @@ void execute_command(char **args, int no_of_args)
     }
     else if (strcmp(args[0], "ls") == 0)
     {
+
         ls_implement(args, no_of_args);
         // printf("\n");
         // init_shell();
@@ -59,8 +88,17 @@ void execute_command(char **args, int no_of_args)
         //printf("\n");
         //init_shell();
     }
+    else if (strcmp(args[0], "history") == 0)
+    {
+        showhistory();
+    }
+    else if (strcmp(args[0], "exit") == 0)
+    {
+        exit(0);
+    }
     else
     {
+
         // printf("%ld\n", strlen(args[0]));
         if (strlen(args[0]) != 0)
         {
