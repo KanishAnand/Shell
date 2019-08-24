@@ -82,10 +82,14 @@ void system_commands(char **args, int no_of_args)
         {
             // this prevents making of zombie process which  is very important
             //https: //www.geeksforgeeks.org/zombie-processes-prevention/
-            signal(SIGCHLD, SIG_IGN);
+            //signal(SIGCHLD, SIG_IGN);
+            // sighandler(SIGCHLD, put function here???);
+            // signal(SIGCHLD, func);
             printf("%d\n", pid);
             background_pids[no_of_backgroundprocess] = pid;
-            background_name[no_of_backgroundprocess] = args[0];
+            // background_name[no_of_backgroundprocess] = args[0];
+            // printf("%d\n", no_of_backgroundprocess);
+            // printf("%s\n", background_name[no_of_backgroundprocess]);
             no_of_backgroundprocess++;
         }
         // printf("kk\n");

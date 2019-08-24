@@ -20,8 +20,8 @@
 
 void execute_command(char **args, int no_of_args)
 {
-    char cwd[1024];
-
+    // char cwd[1024];
+    // printf("%s  %s\n", args[0], args[1]);
     if (strcmp(args[0], "cd") == 0)
     {
         if (args[1] == NULL || strlen(args[1]) == 0 || strcmp(args[1], "~") == 0)
@@ -35,10 +35,13 @@ void execute_command(char **args, int no_of_args)
         l--;
         if (args[1][0] == '~')
         {
-            for (int i = 1; i < strlen(args[1]); i++)
+            int i;
+            for (i = 1; i < strlen(args[1]); i++)
             {
                 newpath[l + i] = args[1][i];
             }
+            // put null character at end of string
+            newpath[l + i] = '\0';
             // printf("%s\n", newpath);
             if (chdir(newpath) == -1)
             {
@@ -58,6 +61,7 @@ void execute_command(char **args, int no_of_args)
         }
         //printf("\n");
         // init_shell();
+        free(newpath);
     }
     else if (strcmp(args[0], "echo") == 0)
     {

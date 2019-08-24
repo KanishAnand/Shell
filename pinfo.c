@@ -28,7 +28,7 @@ void pinfo(char **args, int no_of_args)
 
     // a[0] = "cat";
     char *file = (char *)malloc(sizeof(char) * 100);
-    char st[] = "/proc/";
+    char st[1000] = "/proc/";
     char b[] = "/stat";
 
     if (no_of_args == 0 || strlen(args[1]) == 0)

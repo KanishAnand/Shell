@@ -24,7 +24,7 @@ void ls_implement(char **args, int no_of_args)
     struct stat stats;
     if (no_of_args == 0 || strlen(args[1]) == 0)
     {
-        printf("%d\n", no_of_args);
+        //printf("%d\n", no_of_args);
         char cwd[1024];
         getcwd(cwd, sizeof(cwd));
         args[1] = cwd;
@@ -49,7 +49,7 @@ void ls_implement(char **args, int no_of_args)
         }
         else
         {
-            while (d = readdir(p))
+            while ((d = readdir(p)))
             {
                 char *nm = d->d_name;
                 char s = nm[0];
@@ -70,7 +70,7 @@ void ls_implement(char **args, int no_of_args)
 
         if (strcmp(args[1], "-l") == 0)
         {
-            while (d = readdir(p))
+            while ((d = readdir(p)))
             {
                 char *nm = d->d_name;
                 char s = nm[0];
@@ -84,20 +84,20 @@ void ls_implement(char **args, int no_of_args)
         }
         else if (strcmp(args[1], "-a") == 0)
         {
-            while (d = readdir(p))
+            while ((d = readdir(p)))
             {
-                char *nm = d->d_name;
-                char s = nm[0];
+                // char *nm = d->d_name;
+                // char s = nm[0];
                 printf("%s ", d->d_name);
                 printf("\n");
             }
         }
         else if (strcmp(args[1], "-la") == 0 || strcmp(args[1], "-al") == 0)
         {
-            while (d = readdir(p))
+            while ((d = readdir(p)))
             {
                 char *nm = d->d_name;
-                char s = nm[0];
+                // char s = nm[0];
                 printFileProperties(nm, stats);
                 printf("%s ", d->d_name);
                 printf("\n");
@@ -113,7 +113,7 @@ void ls_implement(char **args, int no_of_args)
         }
         else
         {
-            while (d = readdir(p))
+            while ((d = readdir(p)))
             {
                 char *nm = d->d_name;
                 char s = nm[0];

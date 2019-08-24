@@ -1,20 +1,20 @@
+cd -la
+ls -la
+clear
+ls -l -a 
+clear
+mkdir A
 cd a
-cd b
-cd
-cd ~
-cd ~/a
+cd A
+cd ..
+cd A
+cd ..
 ls
-ls -l
-ls -al
-pwd
+cd Assignment23
+cd ..
+cd 
+echo kan
+cd ..
+cd Assignment23
 cd
-pwd
-echo dsfsadf
-echo 			lkjdgs
-			ls
-clear
-ls		a
-ls          a
-ls           
-echo            sd
-clear
+echo kanish

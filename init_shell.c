@@ -17,19 +17,48 @@
 
 void printDir()
 {
-    char cwd[1024];
+    char cwd[2000];
     getcwd(cwd, sizeof(cwd));
     int len = strlen(home_dir);
-    if (strlen(cwd) < len)
+    int l = strlen(cwd);
+    if (l < len)
     {
         printf("%s", cwd);
     }
     else
     {
-        printf("~");
-        for (int i = len; i < strlen(cwd); i++)
+
+        int flag = 0, flag2 = 0;
+        for (int i = 0; i < len; i++)
         {
-            printf("%c", cwd[i]);
+            if (home_dir[i] != cwd[i])
+            {
+                flag = 1;
+                break;
+            }
+        }
+        if (l > len)
+        {
+            if (cwd[len] == '/')
+            {
+                flag2 = 1;
+            }
+        }
+        if (flag == 0 && flag2 == 1)
+        {
+            printf("~");
+            for (int i = len; i < l; i++)
+            {
+                printf("%c", cwd[i]);
+            }
+        }
+        else if (flag == 0 && len == l)
+        {
+            printf("~");
+        }
+        else
+        {
+            printf("%s", cwd);
         }
     }
     printf(">");
@@ -38,7 +67,7 @@ void printDir()
 void init_shell()
 {
     printf("\033[1;32m");
-    struct utsname buffer;
+    // struct utsname buffer;
     char *user = getenv("USER");
     printf("<%s@:", user);
     char hostname[300];

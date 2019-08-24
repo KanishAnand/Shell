@@ -3,8 +3,9 @@
 #include <stdlib.h>
 void main()
 {
-    char *a = "kanish";
+    char a[] = "kanish";
     char b[] = "anand";
     strcat(a, b);
     printf("%s\n", a);
+    printf("%d\n", strlen(a));
 }

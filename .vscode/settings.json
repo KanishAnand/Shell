@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "execute_command.h": "c"
+        "execute_command.h": "c",
+        "history.h": "c"
     }
 }

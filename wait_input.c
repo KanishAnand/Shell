@@ -27,8 +27,7 @@ void wait_input()
     // printf("k\n");
     // printf("%d\n", &dup);
 
-    // printf("l%s\n", buff);
-    int cnt = 0;
+    // int cnt = 0;
     char **token = (char **)malloc(40 * sizeof(char *));
     // for (int i = 0; i < 25; i++)
     // {
@@ -100,7 +99,7 @@ void wait_input()
     int n = 0;
     while (n < no_of_commands)
     {
-        int le = strlen(token[n]);
+        // int le = strlen(token[n]);
         // while (token[n][0] == '\n' || token[n][0] == '\t')
         // {
         //     token[n][0] = '\0';
@@ -118,7 +117,7 @@ void wait_input()
 
         parts[0] = strtok(token[n], " ");
         int i = 0;
-        //printf("%s\n", token);
+
         while (parts[i] != NULL)
         {
             ++i;
@@ -128,16 +127,18 @@ void wait_input()
         --i;
 
         //this is done because fgets puts a new line character at end of read line so when we pass it to exectue command as arg then chdir(arg) was not working.
-        int l = strlen(parts[i]);
+        // strlen(parts[i]);
 
         //this parts[i+1] = 0 is added because arg which is to be passed to execvp should be ended with 0 so that it knows that it ends otherwise we get error of
         //no such file or directory https://stackoverflow.com/questions/33813944/no-such-file-or-directory-when-using-execv
         parts[i + 1] = 0;
         execute_command(parts, i);
         ++n;
+        // printf("kan\n");
         dp[strlen(dp) - 1] = '\0';
         history(dp);
-        // free(dp);
+        free(dp);
+        free(token);
         free(parts);
         free(temp);
         free(buff);
