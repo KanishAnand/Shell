@@ -1,15 +1,3 @@
-cd -la
-ls -la
-clear
-ls -l -a 
-clear
-mkdir A
-cd a
-cd A
-cd ..
-cd A
-cd ..
-ls
 cd Assignment23
 cd ..
 cd 
@@ -18,3 +6,15 @@ cd ..
 cd Assignment23
 cd
 echo kanish
+ls
+ls -l
+ls
+clear
+ls -a
+clear
+ls -l
+ls -al
+ls -l
+man stat
+man lstat
+ls -l

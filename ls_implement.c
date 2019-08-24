@@ -70,17 +70,20 @@ void ls_implement(char **args, int no_of_args)
 
         if (strcmp(args[1], "-l") == 0)
         {
+            long int sum = 0, c;
             while ((d = readdir(p)))
             {
+
                 char *nm = d->d_name;
                 char s = nm[0];
                 if (s != '.')
                 {
-                    printFileProperties(nm, stats);
-                    printf("%s ", d->d_name);
-                    printf("\n");
+                    c = printFileProperties(nm, stats);
+                    sum += c / 2;
+                    printf("%s\n", d->d_name);
                 }
             }
+            printf("total : %ld\n", sum);
         }
         else if (strcmp(args[1], "-a") == 0)
         {
@@ -94,14 +97,16 @@ void ls_implement(char **args, int no_of_args)
         }
         else if (strcmp(args[1], "-la") == 0 || strcmp(args[1], "-al") == 0)
         {
+            long int sum = 0, c;
             while ((d = readdir(p)))
             {
                 char *nm = d->d_name;
                 // char s = nm[0];
-                printFileProperties(nm, stats);
-                printf("%s ", d->d_name);
-                printf("\n");
+                c = printFileProperties(nm, stats);
+                sum += c / 2;
+                printf("%s\n", d->d_name);
             }
+            printf("total : %ld\n", sum);
         }
     }
     else
@@ -127,10 +132,10 @@ void ls_implement(char **args, int no_of_args)
     }
 }
 
-void printFileProperties(char *name, struct stat stats)
+long int printFileProperties(char *name, struct stat stats)
 {
     struct stat buff;
-    stat(name, &buff);
+    lstat(name, &buff);
     struct tm *dt;
     printf((S_ISDIR(buff.st_mode)) ? "d" : "");
     printf((S_ISREG(buff.st_mode)) ? "-" : "");
@@ -157,4 +162,5 @@ void printFileProperties(char *name, struct stat stats)
     char tm[20];
     strftime(tm, 20, "%T", localtime(&(buff.st_mtime)));
     printf("%s\t", tm);
+    return buff.st_blocks;
 }
