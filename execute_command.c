@@ -37,7 +37,7 @@ void execute_command(char **args, int no_of_args)
         if (args[1][0] == '~')
         {
             int i;
-            for (i = 1; i < strlen(args[1]); i++)
+            for (i = 1; i < (int)strlen(args[1]); i++)
             {
                 newpath[l + i] = args[1][i];
             }

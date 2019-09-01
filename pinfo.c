@@ -65,7 +65,7 @@ void pinfo(char **args, int no_of_args)
             ++i;
         }
         char st[100] = "~/";
-        for (int i = 1; i < strlen(parts[1]) - 1; i++)
+        for (int i = 1; i < (int)strlen(parts[1]) - 1; i++)
         {
             st[i + 1] = parts[1][i];
         }

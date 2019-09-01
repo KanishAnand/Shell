@@ -42,6 +42,9 @@ int _kbhit()
 
 void nightswatch(char **args, int no_of_args)
 {
+    if (no_of_args != 3)
+        return;
+
     if (strcmp(args[3], "dirty") == 0)
     {
         char st[1000] = "/proc/meminfo";

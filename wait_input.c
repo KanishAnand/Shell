@@ -24,15 +24,7 @@ void wait_input()
     char *dp = (char *)malloc(length * sizeof(char));
     strcpy(dp, buff);
 
-    // printf("k\n");
-    // printf("%d\n", &dup);
-
-    // int cnt = 0;
     char **token = (char **)malloc(40 * sizeof(char *));
-    // for (int i = 0; i < 25; i++)
-    // {
-    //     token[i] = (char *)malloc(400 * sizeof(char));
-    // }
     token[0] = strtok(buff, ";");
 
     int no_of_commands = 0;
@@ -49,10 +41,10 @@ void wait_input()
     }
 
     char *temp = "";
-    temp = (char *)malloc(sizeof(char) * 30);
+    temp = (char *)malloc(sizeof(char) * 100);
     int j = 0;
 
-    for (int i = p; i < strlen(token[0]); i++)
+    for (int i = p; i < (int)strlen(token[0]); i++)
     {
         temp[j] = token[0][i];
         j++;
@@ -87,7 +79,7 @@ void wait_input()
         temp = (char *)malloc(sizeof(char) * 30);
         int j = 0;
 
-        for (int i = p; i < strlen(token[no_of_commands]); i++)
+        for (int i = p; i < (int)strlen(token[no_of_commands]); i++)
         {
             temp[j] = token[no_of_commands][i];
             j++;
@@ -97,6 +89,7 @@ void wait_input()
     }
 
     int n = 0;
+
     while (n < no_of_commands)
     {
         // int le = strlen(token[n]);
@@ -112,27 +105,25 @@ void wait_input()
         // }
 
         char **parts = (char **)malloc(40 * sizeof(char *));
-        // for (int i = 0; i < 5; i++)
-        //     parts[i] = (char *)malloc(400 * sizeof(char));
 
         parts[0] = strtok(token[n], " ");
-        int i = 0;
+        int no_of_args = 0;
 
-        while (parts[i] != NULL)
+        while (parts[no_of_args] != NULL)
         {
-            ++i;
-            parts[i] = strtok(NULL, " ");
+            ++no_of_args;
+            parts[no_of_args] = strtok(NULL, " ");
         }
 
-        --i;
+        --no_of_args;
 
         //this is done because fgets puts a new line character at end of read line so when we pass it to exectue command as arg then chdir(arg) was not working.
         // strlen(parts[i]);
 
         //this parts[i+1] = 0 is added because arg which is to be passed to execvp should be ended with 0 so that it knows that it ends otherwise we get error of
         //no such file or directory https://stackoverflow.com/questions/33813944/no-such-file-or-directory-when-using-execv
-        parts[i + 1] = 0;
-        execute_command(parts, i);
+        parts[no_of_args + 1] = 0;
+        execute_command(parts, no_of_args);
         ++n;
         // printf("kan\n");
         dp[strlen(dp) - 1] = '\0';

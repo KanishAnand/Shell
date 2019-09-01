@@ -1,2 +1,2 @@
 void ls_implement(char **args, int no_of_args);
-long int printFileProperties(char *name, struct stat stats);
+long int printFileProperties(char *name);

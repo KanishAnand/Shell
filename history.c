@@ -31,10 +31,8 @@ void history(char *rd)
     strcat(st, "his.txt");
 
     int fd = open(st, O_RDWR | O_CREAT, 0677);
-    char line[256];
-    size_t len = 0;
     char *buff = (char *)(calloc(1000, 1));
-    int x = read(fd, buff, 1000);
+    read(fd, buff, 1000);
     char **parts = (char **)malloc(50 * sizeof(char *));
     parts[0] = strtok(buff, "\n");
     if (parts[0] != NULL)
@@ -85,10 +83,9 @@ void showhistory()
     strcat(st, "his.txt");
 
     int fd = open(st, O_RDWR | O_CREAT, 0677);
-    char line[256];
-    size_t len = 0;
+
     char *buff = (char *)(calloc(1000, 1));
-    int x = read(fd, buff, 1000);
+    read(fd, buff, 1000);
     char **parts = (char **)malloc(50 * sizeof(char *));
     parts[0] = strtok(buff, "\n");
     if (parts[0] != NULL)

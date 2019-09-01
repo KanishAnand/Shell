@@ -21,7 +21,6 @@ void ls_implement(char **args, int no_of_args)
 {
     DIR *p;
     struct dirent *d;
-    struct stat stats;
     if (no_of_args == 0 || strlen(args[1]) == 0)
     {
         //printf("%d\n", no_of_args);
@@ -37,7 +36,7 @@ void ls_implement(char **args, int no_of_args)
     l--;
     if (args[1][0] == '~')
     {
-        for (int i = 1; i < strlen(args[1]); i++)
+        for (int i = 1; i < (int)strlen(args[1]); i++)
         {
             newpath[l + i] = args[1][i];
         }
@@ -78,7 +77,7 @@ void ls_implement(char **args, int no_of_args)
                 char s = nm[0];
                 if (s != '.')
                 {
-                    c = printFileProperties(nm, stats);
+                    c = printFileProperties(nm);
                     sum += c / 2;
                     printf("%s\n", d->d_name);
                 }
@@ -102,7 +101,7 @@ void ls_implement(char **args, int no_of_args)
             {
                 char *nm = d->d_name;
                 // char s = nm[0];
-                c = printFileProperties(nm, stats);
+                c = printFileProperties(nm);
                 sum += c / 2;
                 printf("%s\n", d->d_name);
             }
@@ -132,7 +131,7 @@ void ls_implement(char **args, int no_of_args)
     }
 }
 
-long int printFileProperties(char *name, struct stat stats)
+long int printFileProperties(char *name)
 {
     struct stat buff;
     lstat(name, &buff);
