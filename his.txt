@@ -1,20 +1,20 @@
-cd
-ls a
-mkdir a
-cd a
-ls
-touch file
+cd kanish
+echo asdf
+adsf
+echo asdf
 cd ..
-ls a
-ls	a
-ls		a
-ls	 a
-ls 	a
-cd ..
-ls
 cd Assignment23
-mkdir Assignment23
-cd Assignment23
+ls
 cd
-cd a
+echo asdf
+cd ../Assignment23
+cd 
+echo asdfas
+make
+cd ../Assignment23
+cd
+echo asdf
+echo asdfasdgdsfg
 cd ..
+cd Assignment23
+echo asdfasdgsdfghsdgfijnsdkfb

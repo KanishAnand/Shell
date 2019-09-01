@@ -74,7 +74,5 @@ void pinfo(char **args, int no_of_args)
         printf("memory -- %s\n", parts[22]);
         printf("Executable Path -- %s\n", st);
         close(fd);
-        free(parts);
     }
-    //free(buff);
 }

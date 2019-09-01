@@ -21,48 +21,27 @@
 
 void execute_command(char **args, int no_of_args)
 {
-    // char cwd[1024];
-    // printf("%s  %s\n", args[0], args[1]);
     if (strcmp(args[0], "cd") == 0)
     {
         if (args[1] == NULL || strlen(args[1]) == 0 || strcmp(args[1], "~") == 0)
         {
             args[1] = home_dir;
         }
-        char *newpath = (char *)malloc(sizeof(char) * 300);
-        strcpy(newpath, home_dir);
 
-        int l = strlen(home_dir);
-        l--;
+        char *newpath = (char *)malloc(3000);
+
         if (args[1][0] == '~')
         {
-            int i;
-            for (i = 1; i < (int)strlen(args[1]); i++)
-            {
-                newpath[l + i] = args[1][i];
-            }
-            // put null character at end of string
-            newpath[l + i] = '\0';
-            // printf("%s\n", newpath);
-            if (chdir(newpath) == -1)
-            {
-                perror("cd");
-
-                // printf("%s", args[1]);
-            }
+            strcat(newpath, home_dir);
+            strcat(newpath, args[1] + 1);
         }
         else
+            strcpy(newpath, args[1]);
+
+        if (chdir(newpath) == -1)
         {
-            if (chdir(args[1]) == -1)
-            {
-                perror("cd");
-                // printf("%s", args[1]);
-            }
-            //  printf("ka\n");
+            perror("cd");
         }
-        //printf("\n");
-        // init_shell();
-        free(newpath);
     }
     else if (strcmp(args[0], "echo") == 0)
     {

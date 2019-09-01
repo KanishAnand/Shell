@@ -85,11 +85,8 @@ int main()
 					}
 					close(fd);
 				}
-				free(val);
-				free(cat);
 			}
 		}
-		// free(st);
 		init_shell();
 	}
 

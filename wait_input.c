@@ -92,27 +92,15 @@ void wait_input()
 
     while (n < no_of_commands)
     {
-        // int le = strlen(token[n]);
-        // while (token[n][0] == '\n' || token[n][0] == '\t')
-        // {
-        //     token[n][0] = '\0';
-        // }
-        // while (token[n][le - 1] == '\n' || token[n][le - 1] == '\t')
-        // // if (token[n][le - 1] == '\n')
-        // {
-        //     token[n][le - 1] = '\0';
-        //     le--;
-        // }
+        char **parts = (char **)malloc(4000);
 
-        char **parts = (char **)malloc(40 * sizeof(char *));
-
-        parts[0] = strtok(token[n], " ");
+        parts[0] = strtok(token[n], " \t");
         int no_of_args = 0;
 
         while (parts[no_of_args] != NULL)
         {
             ++no_of_args;
-            parts[no_of_args] = strtok(NULL, " ");
+            parts[no_of_args] = strtok(NULL, " \t");
         }
 
         --no_of_args;
@@ -125,14 +113,8 @@ void wait_input()
         parts[no_of_args + 1] = 0;
         execute_command(parts, no_of_args);
         ++n;
-        // printf("kan\n");
+
         dp[strlen(dp) - 1] = '\0';
         history(dp);
-        free(dp);
-        free(token);
-        free(parts);
-        free(temp);
-        free(buff);
-        //printf("%s\n", token);
     }
 }

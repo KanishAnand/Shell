@@ -62,13 +62,11 @@ void nightswatch(char **args, int no_of_args)
             p *= 10;
         }
         time *= 500;
-        //printf("%d\n", time);
         int fd1 = open(st, O_RDONLY);
         char *buff = (char *)calloc(7000, sizeof(char));
         read(fd1, buff, 7000);
 
         char **parts = (char **)malloc(100 * sizeof(char *));
-        //printf("%s\n", buff);
         int i = 0;
         while (i < 50)
         {
@@ -77,18 +75,13 @@ void nightswatch(char **args, int no_of_args)
         }
         printf("%s\n", parts[16]);
         close(fd1);
-        // printf("%d\n", clock());
-        free(parts);
         int msec = 0;
         while (1)
         {
-            // clock_t final_time = clock();
             clock_t diff = clock() - initial_time;
             msec = diff * 1000 / CLOCKS_PER_SEC;
-            //printf("%d\n", msec);
             if (msec >= time)
             {
-                //printf("df\n");
                 initial_time = clock();
                 int fd = open(st, O_RDONLY);
 
@@ -103,7 +96,6 @@ void nightswatch(char **args, int no_of_args)
                     read(fd, buff, 7000);
 
                     char **parts = (char **)malloc(100 * sizeof(char *));
-                    //printf("%s\n", buff);
                     int i = 0;
                     while (i < 50)
                     {
@@ -112,8 +104,6 @@ void nightswatch(char **args, int no_of_args)
                     }
                     printf("%s\n", parts[16]);
                     close(fd);
-                    // printf("%d\n", clock());
-                    free(parts);
                 }
             }
             if (_kbhit())
@@ -143,13 +133,11 @@ void nightswatch(char **args, int no_of_args)
             p *= 10;
         }
         time *= 500;
-        //printf("%d\n", time);
         int fd1 = open(st, O_RDONLY);
         char *buff = (char *)calloc(7000, sizeof(char));
         read(fd1, buff, 7000);
 
         char **parts = (char **)malloc(100 * sizeof(char *));
-        //printf("%s\n", buff);
         int i = 0;
         while (i < 50)
         {
@@ -159,8 +147,6 @@ void nightswatch(char **args, int no_of_args)
         printf("%s\n", parts[0]);
         printf("%s\n", parts[2]);
         close(fd1);
-        // printf("%d\n", clock());
-        free(parts);
         int msec = 0;
         while (1)
         {
@@ -185,7 +171,7 @@ void nightswatch(char **args, int no_of_args)
                     read(fd, buff, 7000);
 
                     char **parts = (char **)malloc(100 * sizeof(char *));
-                    //printf("%s\n", buff);
+
                     int i = 0;
                     while (i < 50)
                     {
@@ -195,8 +181,6 @@ void nightswatch(char **args, int no_of_args)
                     printf("%s\n", parts[0]);
                     printf("%s\n", parts[2]);
                     close(fd);
-                    // printf("%d\n", clock());
-                    free(parts);
                 }
             }
             if (_kbhit())

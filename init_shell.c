@@ -67,14 +67,11 @@ void printDir()
 void init_shell()
 {
     printf("\033[1;32m");
-    // struct utsname buffer;
     char *user = getenv("USER");
     printf("<%s@:", user);
     char hostname[300];
     gethostname(hostname, 300);
     printf("%s", hostname);
-    //printf("%s:",(&buffer)->sysname);
     printDir();
-    // sleep(1);
     printf("\033[0m");
 }
