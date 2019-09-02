@@ -15,6 +15,7 @@
 #include "execute_command.h"
 #include "main.h"
 #include "history.h"
+#include "redirection.h"
 
 void wait_input()
 {
@@ -92,26 +93,42 @@ void wait_input()
 
     while (n < no_of_commands)
     {
-        char **parts = (char **)malloc(4000);
-
-        parts[0] = strtok(token[n], " \t");
-        int no_of_args = 0;
-
-        while (parts[no_of_args] != NULL)
+        int flag = 0;
+        for (int i = 0; i < (int)strlen(token[n]); i++)
         {
-            ++no_of_args;
-            parts[no_of_args] = strtok(NULL, " \t");
+            if (token[n][i] == '|')
+            {
+                flag = 1;
+                break;
+            }
         }
+        if (flag == 1)
+        {
+            redirection(token[n]);
+        }
+        else
+        {
+            char **parts = (char **)malloc(40);
 
-        --no_of_args;
+            parts[0] = strtok(token[n], " \t");
+            int no_of_args = 0;
 
-        //this is done because fgets puts a new line character at end of read line so when we pass it to exectue command as arg then chdir(arg) was not working.
-        // strlen(parts[i]);
+            while (parts[no_of_args] != NULL)
+            {
+                ++no_of_args;
+                parts[no_of_args] = strtok(NULL, " \t");
+            }
 
-        //this parts[i+1] = 0 is added because arg which is to be passed to execvp should be ended with 0 so that it knows that it ends otherwise we get error of
-        //no such file or directory https://stackoverflow.com/questions/33813944/no-such-file-or-directory-when-using-execv
-        parts[no_of_args + 1] = 0;
-        execute_command(parts, no_of_args);
+            --no_of_args;
+
+            //this is done because fgets puts a new line character at end of read line so when we pass it to exectue command as arg then chdir(arg) was not working.
+            // strlen(parts[i]);
+
+            //this parts[i+1] = 0 is added because arg which is to be passed to execvp should be ended with 0 so that it knows that it ends otherwise we get error of
+            //no such file or directory https://stackoverflow.com/questions/33813944/no-such-file-or-directory-when-using-execv
+            parts[no_of_args + 1] = 0;
+            execute_command(parts, no_of_args);
+        }
         ++n;
 
         dp[strlen(dp) - 1] = '\0';

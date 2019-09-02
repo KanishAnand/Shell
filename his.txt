@@ -1,20 +1,20 @@
-cd kanish
-echo asdf
-adsf
-echo asdf
-cd ..
-cd Assignment23
+touch file
+cd
+ls		a
+cd a
+cd
+echo sdf
+cd a
+cd
+echo a | cat file
+ls | sort
 ls
-cd
-echo asdf
-cd ../Assignment23
-cd 
-echo asdfas
-make
-cd ../Assignment23
-cd
-echo asdf
-echo asdfasdgdsfg
-cd ..
-cd Assignment23
-echo asdfasdgsdfghsdgfijnsdkfb
+ls|sort
+ls -l | sort
+vim file
+ls | sort
+cat file
+echo kanish | grep k
+ls | sort
+echo kan 
+ ls

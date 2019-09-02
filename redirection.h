@@ -1,1 +1,1 @@
-void redirectino(char **args, int no_of_args);
+void redirection(char *args);
