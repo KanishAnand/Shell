@@ -13,7 +13,7 @@
 #include "main.h"
 int cnt = 0;
 
-void push(char in[], char **qu)
+void push(char *in, char **qu)
 {
 
     qu[cnt] = in;
@@ -24,7 +24,7 @@ void history(char *rd)
 {
     cnt = 0;
 
-    char **qu = (char **)malloc(sizeof(char *) * 50);
+    char **qu = (char **)malloc(sizeof(char *) * 500);
     char st[100] = " ";
     strcpy(st, home_dir);
     strcat(st, "/");
@@ -75,41 +75,37 @@ void history(char *rd)
 
 void showhistory()
 {
-    cnt = 0;
-    char **qu = (char **)malloc(sizeof(char *) * 50);
-    char st[] = " ";
+    char **qu = (char **)malloc(500);
+
+    char *st = (char *)malloc(1000);
     strcpy(st, home_dir);
     strcat(st, "/");
     strcat(st, "his.txt");
 
     int fd = open(st, O_RDWR | O_CREAT, 0677);
 
-    char *buff = (char *)(calloc(1000, 1));
+    char *buff = (char *)(calloc(1000, 0));
     read(fd, buff, 1000);
-    char **parts = (char **)malloc(50 * sizeof(char *));
-    parts[0] = strtok(buff, "\n");
-    if (parts[0] != NULL)
+
+    char *ptr = strtok(buff, "\n");
+    cnt = 0;
+    if (ptr)
     {
-        push(parts[0], qu);
-    }
-    int i = 0;
-    while (parts[i] != NULL)
-    {
-        ++i;
-        parts[i] = strtok(NULL, "\n");
-        if (parts[i] != NULL)
+        qu[cnt++] = ptr;
+        while ((ptr = strtok(NULL, "\n")))
         {
-            push(parts[i], qu);
+            qu[cnt++] = ptr;
         }
     }
-    --i;
+
     close(fd);
     int p = 0;
-    if (cnt - 10 > 0)
+    if (cnt > 10)
     {
         p = cnt - 10;
     }
-    for (int i = p; i < cnt; i++)
+
+    for (int i = p; i < cnt - 5; i++)
     {
         printf("%s\n", qu[i]);
     }

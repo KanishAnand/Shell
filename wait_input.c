@@ -130,7 +130,6 @@ void wait_input()
             execute_command(parts, no_of_args);
         }
         ++n;
-
         dp[strlen(dp) - 1] = '\0';
         history(dp);
     }
