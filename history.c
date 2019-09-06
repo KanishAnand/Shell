@@ -91,7 +91,7 @@ void showhistory() {
         p = cnt - 10;
     }
 
-    for (int i = p; i < cnt - 5; i++) {
+    for (int i = p; i < cnt; i++) {
         printf("%s\n", qu[i]);
     }
 }

@@ -1,20 +1,20 @@
+cat file3
+cat file4
+vim file5
+cat file5
+sort > file9 < file < file5
+cat file9
+cat file
+cat file5
+cd a
+cd ..
+sort < file
+cd a
+ls
+rm file
+rm file4
+rm file5
+rm file9
+ls
+rm ksdf
 clear
-sort < file
-cd a
-sort < file
-ls
-cat file
-echo kanish > file2
-cat file2
-sort < file2
-cd a
-sort < file
-sort < file2
-vim file
-cat file
-sort < file
-vim file
-sort < file
-cd a
-sort < file
-ls

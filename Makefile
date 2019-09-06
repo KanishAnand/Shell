@@ -1,4 +1,6 @@
 default: main
 
 main: main.c execute_command.c init_shell.c ls_implement.c wait_input.c system_commands.c pinfo.c nightswatch.c redirection.c ioredirection.c main.h history.c execute_command.h init_shell.h ls_implement.h wait_input.h system_commands.h pinfo.h history.h nightswatch.h redirection.h ioredirection.h
-	gcc main.c execute_command.c init_shell.c ls_implement.c wait_input.c system_commands.c pinfo.c history.c nightswatch.c redirection.c ioredirection.c -g -Wall -Wextra
+	gcc main.c execute_command.c init_shell.c ls_implement.c wait_input.c system_commands.c pinfo.c history.c nightswatch.c redirection.c ioredirection.c -g3 -Wall -Wextra
+
+
