@@ -39,6 +39,7 @@ void outputredirect(char *args) {
         cmnd[i] = strtok(NULL, ">");
     }
 
+    parts[1] = strtok(parts[1], " \t");
     cmnd[i] = 0;
     pid_t p = fork();
     if (p == 0) {
@@ -46,6 +47,40 @@ void outputredirect(char *args) {
         int fd = open(parts[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
         dup2(fd, STDOUT_FILENO);
         execvp(cmnd[0], cmnd);
+    } else {
+        wait(NULL);
+    }
+}
+
+void inputredirect(char *args) {
+    char **parts = (char **)malloc(sizeof(4000));
+    parts[0] = strtok(args, "<");
+    int i = 0;
+    while (parts[i] != NULL) {
+        ++i;
+        parts[i] = strtok(NULL, "<");
+    }
+
+    parts[i] = 0;
+    char **cmnd = (char **)malloc(sizeof(1000));
+    cmnd[0] = strtok(parts[0], " \t");
+    i = 0;
+    while (cmnd[i] != NULL) {
+        ++i;
+        cmnd[i] = strtok(NULL, "<");
+    }
+
+    parts[1] = strtok(parts[1], " \t");
+    cmnd[i] = 0;
+    pid_t p = fork();
+    if (p == 0) {
+        int fd = open(parts[1], O_RDONLY);
+        if (fd != -1) {
+            dup2(fd, STDIN_FILENO);
+            execvp(cmnd[0], cmnd);
+        } else {
+            perror(parts[1]);
+        }
     } else {
         wait(NULL);
     }

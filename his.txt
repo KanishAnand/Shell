@@ -1,20 +1,20 @@
-echo kanish > ff
+clear
+sort < file
+cd a
+sort < file
 ls
-cat kanish
-cd a
-ls
-rm kan
-echo kan > fil
-ls
-cat fil
-ls -l
-cat  fil
-cd a
-echo kan > fil
-cd a
-echo kan > fil
-cd a
-echo kanish >file2
+cat file
+echo kanish > file2
 cat file2
-echo kanish > file3
-cat file3
+sort < file2
+cd a
+sort < file
+sort < file2
+vim file
+cat file
+sort < file
+vim file
+sort < file
+cd a
+sort < file
+ls

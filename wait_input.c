@@ -102,10 +102,18 @@ void wait_input() {
                 break;
             }
         }
+        for (int i = 0; i < (int)strlen(token[n]); i++) {
+            if (token[n][i] == '<') {
+                flag = 3;
+                break;
+            }
+        }
         if (flag == 1) {
             redirection(token[n]);
         } else if (flag == 2) {
             outputredirect(token[n]);
+        } else if (flag == 3) {
+            inputredirect(token[n]);
         } else {
             char **parts = (char **)malloc(40);
 
