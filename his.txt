@@ -1,20 +1,20 @@
-sfd
-echo kanish\
-cat file
-cat file | wc
-cat file
-cat file | wc -w
-cat file | wc | wc -w
-cat file | wx
-cat file | wc
-cat file | wc | wc -w
-cat < file
-cat file | sort -n
-cat file|sort -n
-cat file | wc | grep 0
-cat file | wc | grep 3
-cat file | wc -w | grep 3
-cat file | wc 
-cat file | wc -w
-cat file | wc -w grep 4
-cat file | wc | grep 4
+echo kanish > ff
+ls
+cat kanish
+cd a
+ls
+rm kan
+echo kan > fil
+ls
+cat fil
+ls -l
+cat  fil
+cd a
+echo kan > fil
+cd a
+echo kan > fil
+cd a
+echo kanish >file2
+cat file2
+echo kanish > file3
+cat file3
