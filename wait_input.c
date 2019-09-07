@@ -96,12 +96,15 @@ void wait_input() {
                 break;
             }
         }
-        for (int i = 0; i < (int)strlen(token[n]); i++) {
-            if (token[n][i] == '>' || token[n][i] == '<') {
-                flag = 2;
-                break;
+        if (flag == 0) {
+            for (int i = 0; i < (int)strlen(token[n]); i++) {
+                if (token[n][i] == '>' || token[n][i] == '<') {
+                    flag = 2;
+                    break;
+                }
             }
         }
+        // printf("%d\n", flag);
         // for (int i = 0; i < (int)strlen(token[n]); i++) {
         //     if (token[n][i] == '<') {
         //         flag = 3;

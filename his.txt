@@ -1,20 +1,20 @@
-cat file3
-cat file4
-vim file5
-cat file5
-sort > file9 < file < file5
-cat file9
-cat file
-cat file5
-cd a
-cd ..
-sort < file
-cd a
 ls
-rm file
-rm file4
-rm file5
-rm file9
+cat file2
+cat a
+rm a
 ls
-rm ksdf
+cat b
+rm b
 clear
+ls
+ls -l
+cat output
+rm output
+ls
+cat cat
+rm cat
+clear
+cat file
+cat file2
+ls
+cd
