@@ -56,6 +56,8 @@ void system_commands(char **args, int no_of_args) {
             // signal(SIGCHLD, func);
             printf("%d\n", pid);
             background_pids[no_of_backgroundprocess] = pid;
+            stopped_pids[no_of_backgroundprocess] = pid;
+            background_process[no_of_backgroundprocess] = args[0];
             no_of_backgroundprocess++;
         }
     }

@@ -45,10 +45,17 @@ void ioredirect1(char *args) {
     }
 
     char **cmnd = (char **)malloc(4000);
-    char *cmnds = (char *)malloc(1000);
+    // char *cmnds = (char *)malloc(1000);
+    char **tkn = (char **)malloc(4000);
     cmnd[0] = strtok(argscp1, ">");
     cmnd[0] = strtok(cmnd[0], "<");
-    cmnds = strtok(cmnd[0], " \t");
+    // cmnds = strtok(cmnd[0], " \t");
+    int z = 0;
+    tkn[0] = strtok(cmnd[0], " \t");
+    while (tkn[z] != NULL) {
+        ++z;
+        tkn[z] = strtok(NULL, " \t");
+    }
 
     if (output_right != -1) {
         char **parts = (char **)malloc(4000);
@@ -105,8 +112,8 @@ void ioredirect1(char *args) {
                 }
             }
         }
-        if (execvp(cmnds, cmnd) == -1) {
-            perror("command");
+        if (execvp(tkn[0], tkn) == -1) {
+            perror(tkn[0]);
             exit(0);
         }
     } else {
