@@ -1,20 +1,20 @@
-ps
-clear
-cd a
 firefox &
 jobs
-ps
-vim file &
-ps
+firefox &
 jobs
+firefox &
+jobs
+kjob 2 9
 touch file &
-ps
-jobs
-firefox &
-jobs
-firefox &
-jobs
-firefox &
 jobs
 ps
-clear
+firefox &
+jobs
+kjob 1 9
+jobs
+josbs
+touch file &
+jobs
+jbos
+kjob 2 9
+jobs

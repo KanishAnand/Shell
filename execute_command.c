@@ -98,6 +98,8 @@ void execute_command(char **args, int no_of_args) {
         }
     } else if (strcmp(args[0], "jobs") == 0) {
         jobs();
+    } else if (strcmp(args[0], "kjob") == 0) {
+        kjob(args, no_of_args);
     } else {
         // printf("%ld\n", strlen(args[0]));
         if (strlen(args[0]) != 0) {
