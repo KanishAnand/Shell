@@ -1,20 +1,20 @@
-firefox &
+vim file &
 jobs
-firefox &
-jobs
-firefox &
-jobs
-kjob 2 9
-touch file &
-jobs
-ps
-firefox &
-jobs
-kjob 1 9
-jobs
-josbs
-touch file &
-jobs
-jbos
-kjob 2 9
-jobs
+clear
+history
+cronjob -c ls -t 2 -p 6
+ls
+clear
+cronjob -c ls -t 3 -p 6
+
+clear
+history
+cronjob -c ls -t 2 -p 6
+ls
+cronjob -c ls -t 2 -p 6
+clear
+kquit
+history
+qut
+clear
+cronjob -c ls -t 3 -p 6

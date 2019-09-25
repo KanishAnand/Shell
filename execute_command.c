@@ -59,7 +59,7 @@ void execute_command(char **args, int no_of_args) {
         // init_shell();
     } else if (strcmp(args[0], "history") == 0) {
         showhistory();
-    } else if (strcmp(args[0], "exit") == 0) {
+    } else if (strcmp(args[0], "quit") == 0) {
         exit(0);
     } else if (strcmp(args[0], "nightswatch") == 0) {
         nightswatch(args, no_of_args);
@@ -100,6 +100,14 @@ void execute_command(char **args, int no_of_args) {
         jobs();
     } else if (strcmp(args[0], "kjob") == 0) {
         kjob(args, no_of_args);
+    } else if (strcmp(args[0], "fg") == 0) {
+        fg(args, no_of_args);
+    } else if (strcmp(args[0], "bg") == 0) {
+        bg(args, no_of_args);
+    } else if (strcmp(args[0], "overkill") == 0) {
+        overkill();
+    } else if (strcmp(args[0], "cronjob") == 0) {
+        cronjob(args, no_of_args);
     } else {
         // printf("%ld\n", strlen(args[0]));
         if (strlen(args[0]) != 0) {

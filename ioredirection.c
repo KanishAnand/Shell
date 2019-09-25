@@ -22,7 +22,7 @@
 #include "wait_input.h"
 
 void ioredirect(char *args) {
-    int output_right = -1, input_right = -1;
+    int output_right = -1, input_right = -1, double_redirect = 0;
     char *argscp = (char *)malloc(4000);
     char *argscp1 = (char *)malloc(4000);
     char *output_arg = (char *)malloc(1000);
@@ -43,13 +43,16 @@ void ioredirect(char *args) {
             break;
         }
     }
+    if (output_right != -1) {
+        if (output_right > 0 && args[output_right - 1] == '>') {
+            double_redirect = 1;
+        }
+    }
 
     char **cmnd = (char **)malloc(4000);
     char **tkn = (char **)malloc(4000);
-    // char *cmnds = (char *)malloc(1000);
     cmnd[0] = strtok(argscp1, ">");
     cmnd[0] = strtok(cmnd[0], "<");
-    // cmnds = strtok(cmnd[0], " \t");
     int z = 0;
     tkn[0] = strtok(cmnd[0], " \t");
     while (tkn[z] != NULL) {
@@ -87,10 +90,9 @@ void ioredirect(char *args) {
 
     pid_t p = fork();
     if (p == 0) {
-        int fd = open(input_arg, O_RDONLY);
-        int fd1 = open(output_arg, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-
         if (input_right != -1) {
+            int fd = open(input_arg, O_RDONLY);
+
             if (fd == -1) {
                 perror(input_arg);
                 exit(0);
@@ -102,6 +104,13 @@ void ioredirect(char *args) {
             }
         }
         if (output_right != -1) {
+            int fd1;
+            if (double_redirect == 0) {
+                fd1 = open(output_arg, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+            } else {
+                fd1 = open(output_arg, O_WRONLY | O_CREAT | O_APPEND, 0644);
+            }
+
             if (fd1 == -1) {
                 perror(output_arg);
                 exit(0);

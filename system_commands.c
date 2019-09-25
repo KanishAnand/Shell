@@ -15,7 +15,7 @@
 #include "ls_implement.h"
 #include "main.h"
 #include "wait_input.h"
-
+pid_t processpid;
 // as we have to use execvp so we need to make a child process bcz otherwise
 // execvp replaces the current running process with a new process
 
@@ -26,6 +26,7 @@ void system_commands(char **args, int no_of_args) {
     }
 
     pid_t pid = fork();
+    // processpid = 0;
     if (pid == 0) {
         if (background == 1) {
             // this changes the group pid of the process to 0
@@ -34,20 +35,25 @@ void system_commands(char **args, int no_of_args) {
             // sid = setsid();
             // close the input and error printing of background process but not
             // output as we want the final result
-            close(STDIN_FILENO);
-            close(STDOUT_FILENO);
+            // close(STDIN_FILENO);
+            // close(STDOUT_FILENO);
             close(STDERR_FILENO);
+            args[no_of_args] = 0;
         }
+        // args = strtok(args, "&");
+
         if (execvp(args[0], args) == -1) {
             perror("exec");
         }
         exit(0);
     }
     if (pid > 0) {
+        processpid = pid;
         if (background == 0) {
             // this blocks parent process until all its children process not
             // gets finished.
-            wait(NULL);
+            int status;
+            waitpid(pid, &status, WUNTRACED);
         } else {
             // this prevents making of zombie process which  is very important
             // https: //www.geeksforgeeks.org/zombie-processes-prevention/

@@ -3,9 +3,11 @@
 #include <fcntl.h>
 #include <readline/history.h>
 #include <readline/readline.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/utsname.h>
@@ -15,6 +17,7 @@
 #include "init_shell.h"
 #include "ls_implement.h"
 #include "pinfo.h"
+#include "signal_handling.h"
 #include "wait_input.h"
 
 #define clear() printf("\033[H\033[J")
@@ -24,18 +27,23 @@ int background_pids[200];
 int stopped_pids[200];
 int no_of_backgroundprocess = 0;
 char **background_process;
+// pid_t mainshell;
 
 int main() {
     clear();
     background_process = (char **)malloc(2000 * sizeof(char **));
-    // background_name = (char **)malloc(1000 * sizeof(char **));
+    signal(SIGTSTP, sigintHandlerZ);
+    signal(SIGINT, sigintHandlerC);
     getcwd(home_dir, sizeof(home_dir));
     init_shell();
+    // mainshell = fork();
 
     while (1) {
         wait_input();
         // char st[1000] = "/proc/";
         int pid, pid_status;
+        signal(SIGINT, sigintHandlerC);
+        // signal(SIGTSTP, sigintHandlerZ);
         while ((pid = waitpid(-1, &pid_status, WNOHANG | WUNTRACED)) > 0) {
             if (WIFEXITED(pid_status)) {
                 for (int i = 0; i < no_of_backgroundprocess; i++) {
@@ -45,6 +53,7 @@ int main() {
                             "Background process (%s) of 'PID' : %d exited "
                             "successfully \n",
                             background_process[i], pid);
+                        break;
                     }
                 }
             } else if (WIFSIGNALED(pid_status)) {
@@ -55,6 +64,7 @@ int main() {
                             "Background process (%s) of 'PID' : %d exited "
                             "successfully \n",
                             background_process[i], pid);
+                        break;
                     }
                 }
             }
@@ -64,7 +74,8 @@ int main() {
             //             // running_proc_size--;
             //             // char *t3;
             //             // t3 = get_bgname(pid);
-            //             fprintf(stderr, "%s with pid %d exited normally \n",
+            //             fprintf(stderr, "%s with pid %d exited normally
+            //             \n",
             //                     names[i], pid);
             //             // free(running[i].pname);
             //             break;
@@ -75,7 +86,8 @@ int main() {
             //         if (bg1[i] == pid) {
             //             bg1[i] = -1;
             //             // running_proc_size--;
-            //             fprintf(stderr, "process with pid %d terminated \n",
+            //             fprintf(stderr, "process with pid %d terminated
+            //             \n",
             //                     pid);
             //             // free(running[i].pname);
             //             break;
@@ -126,9 +138,9 @@ int main() {
         //             if (strcmp(parts[2], "Z") == 0) {
         //                 // printf("%d\n", i);
         //                 printf(
-        //                     "Background process (%s) of 'PID' : %s exited "
-        //                     "successfully \n",
-        //                     background_process[i], cat);
+        //                     "Background process (%s) of 'PID' : %s exited
+        //                     " "successfully \n", background_process[i],
+        //                     cat);
         //                 background_pids[i] = 0;
         //             }
         //             close(fd);

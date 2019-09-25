@@ -1,3 +1,13 @@
 pending:
 
 1. >> with >
+2. get status of process from file in jobs command
+3. history or other commands not working if his.txt is empty.
+4. make code modular and remove like unecesary headers in .h files
+5. do setenv with setenv and not putenv 
+6. seq 1000000 & not working
+7. sleep 20 and then ctrl C
+8. close stdout in system_command in background process or not . If i close then seq 1000000 & not same if don't close then vim file & not same.
+9. jobs is not changing after fg
+10. command is not getting saved in history file after it is run from up key arrow
+11. run commands from own implementation in multiple piping and all and not by execvp

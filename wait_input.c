@@ -1,5 +1,6 @@
 #include "wait_input.h"
 #include <dirent.h>
+#include <fcntl.h>
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stdio.h>
@@ -17,13 +18,41 @@
 #include "ls_implement.h"
 #include "main.h"
 #include "redirection.h"
+#include "system_commands.h"
 
 void wait_input() {
     int length = 500;
     char *buff = (char *)malloc(length * sizeof(char));
+    processpid = 0;
     fgets(buff, length, stdin);
     char *dp = (char *)malloc(length * sizeof(char));
     strcpy(dp, buff);
+    // int up_key = 0;
+    // // printf("%ld %ld %ld %ld %ld %ld %ld\n", buff[0], buff[1], buff[2],
+    // // buff[3],
+    // //        buff[4], buff[5], buff[6]);
+    // // printf("%ld\n", strlen(buff));
+    // if (buff[0] == 27) {
+    //     int l = strlen(buff), count = 0;
+    //     int f = 1;
+    //     if ((l - 4) % 3 == 0) {
+    //         for (int i = 0; i < l; i += 3) {
+    //             printf("k%d %d\n", buff[i], i);
+    //             if (buff[i] != 27) {
+    //                 f = 0;
+    //                 break;
+    //             }
+    //         }
+    //     } else {
+    //         f = 0;
+    //     }
+    //     if (f == 1) {
+    //         up_key = 1;
+    //         l = l - 4;
+    //         count++;
+    //         count += l / 3;
+    //     }
+    // }
 
     char **token = (char **)malloc(40 * sizeof(char *));
     token[0] = strtok(buff, ";");
@@ -89,6 +118,54 @@ void wait_input() {
     int n = 0;
 
     while (n < no_of_commands) {
+        int up_key = 0, count = 0;
+        if (buff[0] == 27) {
+            int l = strlen(token[n]);
+            int f = 1;
+            if (l % 3 == 0) {
+                for (int i = 0; i < l; i += 3) {
+                    if (token[n][i] != 27) {
+                        f = 0;
+                        break;
+                    }
+                }
+            } else {
+                f = 0;
+            }
+            if (f == 1) {
+                up_key = 1;
+                count += l / 3;
+            }
+        }
+
+        if (up_key == 1) {
+            char *st = (char *)malloc(1000);
+            st[0] = 0;
+            strcat(st, home_dir);
+            strcat(st, "/");
+            strcat(st, "his.txt");
+
+            int fd = open(st, O_RDONLY);
+
+            char *buff = (char *)malloc(4000);
+            read(fd, buff, 1000);
+
+            char **ptr = (char **)calloc(4000, 1);
+            ptr[0] = strtok(buff, "\n");
+            int j = 0;
+
+            while (ptr[j] != NULL) {
+                ++j;
+                ptr[j] = strtok(NULL, "\n");
+            }
+
+            ptr[j] = 0;
+            strcpy(token[n], ptr[j - count]);
+            init_shell();
+            printf("%s\n", token[n]);
+            close(fd);
+        }
+
         int flag = 0;
         for (int i = 0; i < (int)strlen(token[n]); i++) {
             if (token[n][i] == '|') {
@@ -104,22 +181,11 @@ void wait_input() {
                 }
             }
         }
-        // printf("%d\n", flag);
-        // for (int i = 0; i < (int)strlen(token[n]); i++) {
-        //     if (token[n][i] == '<') {
-        //         flag = 3;
-        //         break;
-        //     }
-        // }
         if (flag == 1) {
             redirection(token[n]);
         } else if (flag == 2) {
             ioredirect(token[n]);
-        }
-        // else if (flag == 3) {
-        //     inputredirect(token[n]);
-        // }
-        else {
+        } else {
             char **parts = (char **)malloc(40);
 
             parts[0] = strtok(token[n], " \t");
@@ -145,6 +211,8 @@ void wait_input() {
         }
         ++n;
         dp[strlen(dp) - 1] = '\0';
-        history(dp);
+        if (up_key != 1) {
+            history(dp);
+        }
     }
 }

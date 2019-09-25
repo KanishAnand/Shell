@@ -71,9 +71,9 @@ void showhistory() {
     strcat(st, "/");
     strcat(st, "his.txt");
 
-    int fd = open(st, O_RDWR | O_CREAT, 0677);
+    int fd = open(st, O_RDONLY);
 
-    char *buff = (char *)(calloc(1000, 0));
+    char *buff = (char *)malloc(4000);
     read(fd, buff, 1000);
 
     char *ptr = strtok(buff, "\n");
