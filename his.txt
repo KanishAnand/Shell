@@ -1,20 +1,20 @@
+./aout
+ps
 vim file &
 jobs
-clear
-history
-cronjob -c ls -t 2 -p 6
+./a.out
+2R[>1
+5202
+0c]10
+rgb:ecec/f0f0/1313]11
+rgb:3131/3838/3c3c
 ls
-clear
-cronjob -c ls -t 3 -p 6
-
-clear
-history
-cronjob -c ls -t 2 -p 6
-ls
-cronjob -c ls -t 2 -p 6
-clear
-kquit
-history
-qut
-clear
-cronjob -c ls -t 3 -p 6
+[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[
+[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[M`M5[M`M5[M`M5[M
+M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[Ma
+aM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[M`M5[M`M5[M`M
+M5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5
+5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5
+[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[MaM5[MaM5[MaM5[MaM5[
+[MaM5[MaM5[MaM5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M
+M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[M`M5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[MaM5[M

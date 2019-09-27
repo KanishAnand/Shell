@@ -12,11 +12,6 @@
 
 // function to handle Ctrl-C
 void sigintHandlerC(int sig_num) {
-    // signal(SIGINT, sigintHandlerC);
-    // printf("\n");
-    // init_shell();
-    // fflush(stdout);
-
     pid_t process = processpid;
     if (process > 0) {
         kill(process, sig_num);

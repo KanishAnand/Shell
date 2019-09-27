@@ -36,7 +36,6 @@ int main() {
     signal(SIGINT, sigintHandlerC);
     getcwd(home_dir, sizeof(home_dir));
     init_shell();
-    // mainshell = fork();
 
     while (1) {
         wait_input();

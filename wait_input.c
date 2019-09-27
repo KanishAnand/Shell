@@ -25,8 +25,8 @@ void wait_input() {
     char *buff = (char *)malloc(length * sizeof(char));
     processpid = 0;
     fgets(buff, length, stdin);
-    char *dp = (char *)malloc(length * sizeof(char));
-    strcpy(dp, buff);
+    // char *dp = (char *)malloc(length * sizeof(char));
+    // strcpy(dp, buff);
     // int up_key = 0;
     // // printf("%ld %ld %ld %ld %ld %ld %ld\n", buff[0], buff[1], buff[2],
     // // buff[3],
@@ -181,6 +181,9 @@ void wait_input() {
                 }
             }
         }
+        char *dp = (char *)malloc(length * sizeof(char));
+        strcpy(dp, token[n]);
+
         if (flag == 1) {
             redirection(token[n]);
         } else if (flag == 2) {
@@ -210,9 +213,10 @@ void wait_input() {
             execute_command(parts, no_of_args);
         }
         ++n;
-        dp[strlen(dp) - 1] = '\0';
-        if (up_key != 1) {
-            history(dp);
-        }
+        // char *dp = (char *)malloc(length * sizeof(char));
+        // dp[strlen(dp) - 1] = '\0';
+        // if (up_key != 1) {
+        history(dp);
+        // }
     }
 }

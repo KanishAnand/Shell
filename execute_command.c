@@ -62,7 +62,13 @@ void execute_command(char **args, int no_of_args) {
     } else if (strcmp(args[0], "quit") == 0) {
         exit(0);
     } else if (strcmp(args[0], "nightswatch") == 0) {
-        nightswatch(args, no_of_args);
+        pid_t p = fork();
+        if (p == 0) {
+            nightswatch(args, no_of_args);
+        }
+        if (p > 0) {
+            processpid = p;
+        }
     } else if (strcmp(args[0], "setenv") == 0) {
         char *st = (char *)malloc(2000);
         // strcat(st, "\"");

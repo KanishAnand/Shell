@@ -32,6 +32,7 @@ void history(char *rd) {
     read(fd, buff, 1000);
     char **parts = (char **)malloc(50 * sizeof(char *));
     parts[0] = strtok(buff, "\n");
+
     if (parts[0] != NULL) {
         push(parts[0], qu);
     }
@@ -45,9 +46,14 @@ void history(char *rd) {
     }
     --i;
 
-    if (strcmp(parts[i], rd) != 0) {
+    if (parts[0] != NULL) {
+        if (strcmp(parts[i], rd) != 0) {
+            push(rd, qu);
+        }
+    } else {
         push(rd, qu);
     }
+
     close(fd);
     fd = open(st, O_WRONLY | O_TRUNC, 0677);
     int p = 0;

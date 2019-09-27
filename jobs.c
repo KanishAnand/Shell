@@ -12,32 +12,44 @@
 
 void jobs() {
     for (int i = 0; i < no_of_backgroundprocess; i++) {
-        char **parts = (char **)malloc(100 * sizeof(char *));
-        char *file = (char *)malloc(sizeof(char) * 100);
-        char st[1000] = "/proc/";
-        char b[] = "/stat";
-        char *snum = (char *)malloc(sizeof(char) * 200);
-        sprintf(snum, "%d", stopped_pids[i]);
-        strcat(file, st);
-        strcat(file, snum);
-        strcat(file, b);
-        int fd = open(file, O_RDONLY);
-        if (fd == -1) {
-            perror("jobs");
-        } else {
-            char *buff = (char *)calloc(300, sizeof(char));
-            read(fd, buff, 300);
-            int j = 0;
-            while (j < 50) {
-                parts[j] = strsep(&buff, " ");
-                ++j;
-            }
-            close(fd);
-        }
-
         if (background_pids[i] != 0) {
-            printf("[%d] %s %s [%d]\n", i + 1, parts[2], background_process[i],
-                   stopped_pids[i]);
+            char **parts = (char **)malloc(100 * sizeof(char *));
+            char *file = (char *)malloc(sizeof(char) * 100);
+            char st[1000] = "/proc/";
+            char b[] = "/stat";
+            char *snum = (char *)malloc(sizeof(char) * 200);
+            sprintf(snum, "%d", stopped_pids[i]);
+            strcat(file, st);
+            strcat(file, snum);
+            strcat(file, b);
+            int fd = open(file, O_RDONLY);
+            if (fd == -1) {
+                background_pids[i] = 0;
+                break;
+            } else {
+                char *buff = (char *)calloc(300, sizeof(char));
+                read(fd, buff, 300);
+                int j = 0;
+                while (j < 50) {
+                    parts[j] = strsep(&buff, " ");
+                    ++j;
+                }
+                close(fd);
+            }
+
+            char *str;
+            if (parts[2][0] == 'R') {
+                str = "Running";
+            } else if (parts[2][0] == 'T' || parts[2][0] == 't') {
+                str = "Stopped";
+            } else if (parts[2][0] == 'D' || parts[2][0] == 'S') {
+                str = "Sleeping";
+            } else if (parts[2][0] == 'Z') {
+                str = "Defunct/Zombie";
+            }
+
+            printf("[%d] %s %s %s [%d]\n", i + 1, parts[2], str,
+                   background_process[i], stopped_pids[i]);
             // } else {
             //     printf("[%d] Stopped %s [%d]\n", i + 1,
             //     background_process[i],
@@ -104,9 +116,10 @@ void fg(char **args, int no_of_args) {
     kill(pidnumber, SIGCONT);
     // signal(SIGTTOU, SIG_DFL);
     waitpid(pidnumber, NULL, WUNTRACED);
-    signal(SIGTTOU, SIG_IGN);
+    // signal(SIGTTOU, SIG_IGN);
     tcsetpgrp(0, shellpid);
     signal(SIGTTOU, SIG_DFL);
+    signal(SIGTTIN, SIG_DFL);
 
     // signal(SIGTTIN, SIG_IGN);
     // signal(SIGTTOU, SIG_IGN);
