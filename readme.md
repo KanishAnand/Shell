@@ -20,4 +20,4 @@ NAME - Kanish Anand
 
 ## history.c -> this contains function to implement history command.
 
-##all .h files include declaration of function corresponding to their .c files
+## all .h files include declaration of function corresponding to their .c files
