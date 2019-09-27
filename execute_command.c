@@ -65,8 +65,7 @@ void execute_command(char **args, int no_of_args) {
         pid_t p = fork();
         if (p == 0) {
             nightswatch(args, no_of_args);
-        }
-        if (p > 0) {
+        } else {
             processpid = p;
         }
     } else if (strcmp(args[0], "setenv") == 0) {
