@@ -120,17 +120,6 @@ void fg(char **args, int no_of_args) {
     tcsetpgrp(0, shellpid);
     signal(SIGTTOU, SIG_DFL);
     signal(SIGTTIN, SIG_DFL);
-
-    // signal(SIGTTIN, SIG_IGN);
-    // signal(SIGTTOU, SIG_IGN);
-    // tcsetpgrp(STDIN_FILENO, pidnumber);
-    // kill(pidnumber, SIGCONT);
-
-    // waitpid(pidnumber, NULL, 0);
-
-    // tcsetpgrp(0, getpgrp());
-    // signal(SIGTTIN, SIG_DFL);
-    // signal(SIGTTOU, SIG_DFL);
 }
 
 void bg(char **args, int no_of_args) {
@@ -178,7 +167,7 @@ void cronjob(char **args, int no_of_args) {
         int original = number;
         while (number--) {
             // sleep(no1);
-            printf("%d\n", number);
+            // printf("%d\n", number);
             char **pt = (char **)malloc(1000);
             pt[0] = args[2];
             pt[1] = 0;

@@ -69,33 +69,11 @@ void sigintHandlerZ(int sig_num) {
         fflush(stdout);
     }
 }
-// void enable_raw_mode() {
-//     struct termios term;
-//     tcgetattr(0, &term);
-//     term.c_lflag &= ~(ICANON | ECHO);  // Disable echo as well
-//     tcsetattr(0, TCSANOW, &term);
-// }
-
-// void disable_raw_mode() {
-//     struct termios term;
-//     tcgetattr(0, &term);
-//     term.c_lflag |= ICANON | ECHO;
-//     tcsetattr(0, TCSANOW, &term);
-// }
-
-// int _kbhit() {
-//     int byteswaiting;
-//     enable_raw_mode();
-//     ioctl(0, FIONREAD, &byteswaiting);
-//     disable_raw_mode();
-//     return byteswaiting > 0;
-// }
 
 void signal_handling() {
     char c = getchar();
     while (1) {
         if (c == 'q') {
-            // printf("kk\n");
             break;
         }
     }

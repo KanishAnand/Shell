@@ -25,34 +25,6 @@ void wait_input() {
     char *buff = (char *)malloc(length * sizeof(char));
     processpid = 0;
     fgets(buff, length, stdin);
-    // char *dp = (char *)malloc(length * sizeof(char));
-    // strcpy(dp, buff);
-    // int up_key = 0;
-    // // printf("%ld %ld %ld %ld %ld %ld %ld\n", buff[0], buff[1], buff[2],
-    // // buff[3],
-    // //        buff[4], buff[5], buff[6]);
-    // // printf("%ld\n", strlen(buff));
-    // if (buff[0] == 27) {
-    //     int l = strlen(buff), count = 0;
-    //     int f = 1;
-    //     if ((l - 4) % 3 == 0) {
-    //         for (int i = 0; i < l; i += 3) {
-    //             printf("k%d %d\n", buff[i], i);
-    //             if (buff[i] != 27) {
-    //                 f = 0;
-    //                 break;
-    //             }
-    //         }
-    //     } else {
-    //         f = 0;
-    //     }
-    //     if (f == 1) {
-    //         up_key = 1;
-    //         l = l - 4;
-    //         count++;
-    //         count += l / 3;
-    //     }
-    // }
 
     char **token = (char **)malloc(40 * sizeof(char *));
     token[0] = strtok(buff, ";");

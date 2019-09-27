@@ -48,8 +48,10 @@ void system_commands(char **args, int no_of_args) {
         exit(0);
     }
     if (pid > 0) {
-        processpid = pid;
+        // processpid = pid;
         if (background == 0) {
+            processpid = pid;
+
             // this blocks parent process until all its children process not
             // gets finished.
             int status;

@@ -47,16 +47,10 @@ void execute_command(char **args, int no_of_args) {
     } else if (strcmp(args[0], "pwd") == 0) {
         char cwd[1024];
         printf("%s\n", getcwd(cwd, sizeof(cwd)));
-        // printf("\n");
-        // init_shell();
     } else if (strcmp(args[0], "ls") == 0) {
         ls_implement(args, no_of_args);
-        // printf("\n");
-        // init_shell();
     } else if (strcmp(args[0], "pinfo") == 0) {
         pinfo(args, no_of_args);
-        // printf("\n");
-        // init_shell();
     } else if (strcmp(args[0], "history") == 0) {
         showhistory();
     } else if (strcmp(args[0], "quit") == 0) {
