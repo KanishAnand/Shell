@@ -60,7 +60,7 @@ print size of the part of the memory which is dirty
 18.`quit`
 Exits the shell.
 19. Handles multiple piping and redirection properly.
-
+20. UP arrow will results in running of previous nth number command where n is number of times up arrow is pressed.
 
 # Usage
 To run the shell
