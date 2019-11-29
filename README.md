@@ -51,7 +51,7 @@ Sends signal 'signal_number' to process with given job_id.
 eg. cronjob -c ls -t 3 -p 6
 This command should execute `ls` command after every 3 seconds until 6 seconds
 are elapsed.
-17. `nightswatch <number> <command>
+17. `nightswatch <number> <command>`
 This is a modified version of watch. Press 'q' to exit.
 `nightswatch -n 5 interrupt`
 print number of times CPU has been interrupted by the keyboard.
