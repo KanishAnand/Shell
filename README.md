@@ -47,7 +47,7 @@ Interrupts the running process.
 Kills all jobs at once.
 15 `kjob [job_id] [Signal_number]`
 Sends signal 'signal_number' to process with given job_id.
-16. `cronjob -c <command name> -t <time_interval> -p <total period of running>
+16. `cronjob -c <command name> -t <time_interval> -p <total period of running>`
 eg. cronjob -c ls -t 3 -p 6
 This command should execute `ls` command after every 3 seconds until 6 seconds
 are elapsed.
