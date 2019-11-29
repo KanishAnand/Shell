@@ -13,7 +13,7 @@ Prints details of the process with given pid.If no argument is provided it takes
 Details include : PID, Process Status, Memory , Executable Path.
 5. `cd`
 Changes the directory
-  * cd [argument]
+  ** cd [argument]
   Changes the current directory to the directory mentioned in argument.
   * cd ..
   Takes back to the previous directory.
