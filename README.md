@@ -13,21 +13,21 @@ Prints details of the process with given pid.If no argument is provided it takes
 Details include : PID, Process Status, Memory , Executable Path.
 5. `cd`
 Changes the directory
-  ** cd [argument]
+  >* cd [argument]
   Changes the current directory to the directory mentioned in argument.
-  * cd ..
+  >* cd ..
   Takes back to the previous directory.
-  * cd or cd ~
+  >* cd or cd ~
   Take to the home direcotry.
-  * cd /
+  >* cd /
   Takes to root directory.
 6. `ls`        
 Lists all contents of current directory.       
-* `ls -a`        
+>* `ls -a`        
 Lists all hidden files also.
-* `ls -l`
+>* `ls -l`
 Long Listing of all files.      
-* `ls -al`       
+>* `ls -al`       
 Long Listing of all files including hidden files.
 7. `setenv [var] [val]`
 Sets value of the environment variable 'var' to value 'val'.
